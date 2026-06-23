@@ -43,7 +43,29 @@ def banner():
         print("="*55 + "\n")
 
 
+SIMPLE_REPLIES = {
+    "hi", "hello", "hey", "hiya", "howdy",
+    "thanks", "thank you", "ty", "thx",
+    "ok", "okay", "k", "cool", "got it",
+    "bye", "goodbye", "cya", "exit", "quit",
+    "yes", "no", "yep", "nope", "sure",
+}
+
+def is_simple_input(goal: str) -> bool:
+    return goal.strip().lower() in SIMPLE_REPLIES or len(goal.strip()) < 4
+
+
 def run(goal: str, verbose: bool = True) -> dict:
+    start = time.time()
+
+    # Short-circuit for greetings / one-word inputs
+    if is_simple_input(goal):
+        if RICH:
+            console.print(f"[bold cyan]NEXUS:[/bold cyan] Hello! Give me a research goal or task and I will get to work.")
+        else:
+            print("NEXUS: Hello! Give me a research goal or task and I will get to work.")
+        return {"success": True, "result": None, "job_id": None, "duration": 0, "error": None}
+
     banner()
     start = time.time()
 
@@ -71,7 +93,7 @@ def run(goal: str, verbose: bool = True) -> dict:
             agents=[AGENTS["researcher"], AGENTS["analyst"], AGENTS["coder"], AGENTS["writer"], AGENTS["critic"]],
             tasks=tasks,
             process=Process.sequential,
-            verbose=verbose,
+            verbose=False,
             memory=True,
             cache=True,
             max_rpm=8,
