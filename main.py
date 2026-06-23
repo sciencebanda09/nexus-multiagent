@@ -76,6 +76,13 @@ def run(goal: str, verbose: bool = True) -> dict:
             cache=True,
             max_rpm=8,
             share_crew=False,
+            embedder={
+                "provider": "ollama",
+                "config": {
+                    "model": "nomic-embed-text",
+                    "base_url": "http://localhost:11434",
+                },
+            },
         )
 
         if RICH:
