@@ -9,7 +9,7 @@
 
 ## Enforcement
 
-Violations can be reported to shashankdev@dmechatronix.in.
+Violations can be reported to coderperson043@gmail.com.
 Maintainers reserve the right to remove comments or ban contributors who violate these standards.
 
 ## Scope
