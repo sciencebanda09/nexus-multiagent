@@ -50,26 +50,57 @@ def banner():
 
 
 SIMPLE_REPLIES = {
+    # greetings
     "hi", "hello", "hey", "hiya", "howdy",
-    "thanks", "thank you", "ty", "thx",
-    "ok", "okay", "k", "cool", "got it",
-    "bye", "goodbye", "cya", "exit", "quit",
-    "yes", "no", "yep", "nope", "sure",
+    "how are you", "how are you?", "how r u", "whats up", "what's up",
+    "sup", "yo", "good morning", "good evening", "good afternoon",
+    # thanks
+    "thanks", "thank you", "ty", "thx", "thank u",
+    # acknowledgements
+    "ok", "okay", "k", "cool", "got it", "nice", "great", "awesome",
+    "sounds good", "alright", "understood",
+    # farewells
+    "bye", "goodbye", "cya", "see you", "later",
+    # yes/no
+    "yes", "no", "yep", "nope", "sure", "maybe",
+}
+
+SIMPLE_RESPONSES = {
+    "how are you": "I am doing great, ready to help! Give me a task.",
+    "how are you?": "I am doing great, ready to help! Give me a task.",
+    "how r u": "All good! What task can I work on for you?",
+    "whats up": "Not much — give me a goal and I will get to work!",
+    "what's up": "Not much — give me a goal and I will get to work!",
 }
 
 def is_simple_input(goal: str) -> bool:
-    return goal.strip().lower() in SIMPLE_REPLIES or len(goal.strip()) < 4
+    g = goal.strip().lower()
+    if g in SIMPLE_REPLIES or len(g) < 4:
+        return True
+    # catch short conversational phrases (under 4 words, no action verbs)
+    words = g.split()
+    action_verbs = {"write", "create", "build", "make", "find", "search", "analyze",
+                    "explain", "show", "list", "generate", "run", "code", "fix",
+                    "compare", "summarize", "research", "calculate", "debug"}
+    if len(words) <= 3 and not any(w in action_verbs for w in words):
+        return True
+    return False
+
+def get_simple_response(goal: str) -> str:
+    g = goal.strip().lower()
+    return SIMPLE_RESPONSES.get(g, "Hello! Give me a research goal or task and I will get to work.")
 
 
 def run(goal: str, verbose: bool = True) -> dict:
     start = time.time()
 
-    # Short-circuit for greetings / one-word inputs
+    # Short-circuit for greetings / simple inputs
     if is_simple_input(goal):
+        reply = get_simple_response(goal)
         if RICH:
-            console.print(f"[bold cyan]NEXUS:[/bold cyan] Hello! Give me a research goal or task and I will get to work.")
+            console.print(f"[bold cyan]NEXUS:[/bold cyan] {reply}")
         else:
-            print("NEXUS: Hello! Give me a research goal or task and I will get to work.")
+            print(f"NEXUS: {reply}")
         return {"success": True, "result": None, "job_id": None, "duration": 0, "error": None}
 
     banner()
