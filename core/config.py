@@ -5,7 +5,6 @@ Loads YAML config, initializes LLM with fallback, sets up logging.
 
 import yaml
 import logging
-import os
 import time
 import sqlite3
 from pathlib import Path

@@ -5,8 +5,6 @@ Run: streamlit run ui/app.py
 
 import sys
 import time
-import threading
-import queue
 import sqlite3
 from pathlib import Path
 from datetime import datetime

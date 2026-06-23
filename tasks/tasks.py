@@ -4,7 +4,6 @@ Automatically selects task pipeline based on what the user wants.
 """
 
 import logging
-import re
 import sys
 from pathlib import Path
 from crewai import Task

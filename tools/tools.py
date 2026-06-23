@@ -10,14 +10,13 @@ import os
 import re
 import subprocess
 import sys
-import time
 from pathlib import Path
 from typing import Optional
 
 from crewai.tools import BaseTool
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from core.config import CircuitBreaker, retry, CFG
+from core.config import CircuitBreaker, CFG
 from memory.memory import save_memory, recall_memory
 
 logger = logging.getLogger("nexus.tools")
@@ -315,7 +314,6 @@ class TextAnalysisTool(BaseTool):
         try:
             import re as re_mod
             import collections
-            import math
 
             words = re_mod.findall(r'\b[a-z]+\b', text.lower())
             sentences = re_mod.split(r'[.!?]+', text)
