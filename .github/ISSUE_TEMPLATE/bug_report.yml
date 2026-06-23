@@ -1,0 +1,82 @@
+name: "🐛 Bug Report"
+description: "Something broke — report it here"
+labels: ["bug", "needs-triage"]
+assignees: ["sciencebanda09"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug in NEXUS.
+        Fill out as much as you can — it speeds up the fix.
+
+  - type: input
+    id: version
+    attributes:
+      label: NEXUS Version
+      placeholder: "e.g. v1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Windows 11
+        - Windows 10
+        - Ubuntu / Debian
+        - macOS
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: python
+    attributes:
+      label: Python Version
+      placeholder: "e.g. 3.11.9"
+    validations:
+      required: true
+
+  - type: input
+    id: model
+    attributes:
+      label: Ollama Model(s) in use
+      placeholder: "e.g. qwen2.5:3b, qwen2.5:0.5b"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What happened? What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Run `python main.py`
+        2. Enter goal: "..."
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Full Traceback / Error Output
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: RAM, crewai version, anything else relevant
+    validations:
+      required: false

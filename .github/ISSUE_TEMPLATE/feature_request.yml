@@ -1,0 +1,46 @@
+name: "✨ Feature Request"
+description: "Suggest a new agent, tool, or capability"
+labels: ["enhancement"]
+assignees: ["sciencebanda09"]
+body:
+  - type: markdown
+    attributes:
+      value: "Got an idea to make NEXUS more powerful? Lay it out."
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Motivation
+      description: What can't NEXUS do right now that it should?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - New Agent
+        - New Tool
+        - Memory System
+        - UI / Streamlit
+        - Performance / RAM
+        - Error Handling
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you implement this?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+    validations:
+      required: false
