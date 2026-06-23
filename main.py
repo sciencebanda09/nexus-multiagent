@@ -61,7 +61,7 @@ def run(goal: str, verbose: bool = True) -> dict:
     # Short-circuit for greetings / one-word inputs
     if is_simple_input(goal):
         if RICH:
-            console.print(f"[bold cyan]NEXUS:[/bold cyan] Hello! Give me a research goal or task and I will get to work.")
+            console.print("[bold cyan]NEXUS:[/bold cyan] Hello! Give me a research goal or task and I will get to work.")
         else:
             print("NEXUS: Hello! Give me a research goal or task and I will get to work.")
         return {"success": True, "result": None, "job_id": None, "duration": 0, "error": None}
