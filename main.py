@@ -25,6 +25,12 @@ from agents.agents import AGENTS
 from tasks.tasks import build_tasks
 from core.config import save_job, finish_job, get_job_history
 
+# Suppress noisy LiteLLM / httpx logs
+logging.getLogger("LiteLLM").setLevel(logging.WARNING)
+logging.getLogger("litellm").setLevel(logging.WARNING)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpcore").setLevel(logging.WARNING)
+
 logger = logging.getLogger("nexus.main")
 console = Console() if RICH else None
 
@@ -61,7 +67,7 @@ def run(goal: str, verbose: bool = True) -> dict:
     # Short-circuit for greetings / one-word inputs
     if is_simple_input(goal):
         if RICH:
-            console.print("[bold cyan]NEXUS:[/bold cyan] Hello! Give me a research goal or task and I will get to work.")
+            console.print(f"[bold cyan]NEXUS:[/bold cyan] Hello! Give me a research goal or task and I will get to work.")
         else:
             print("NEXUS: Hello! Give me a research goal or task and I will get to work.")
         return {"success": True, "result": None, "job_id": None, "duration": 0, "error": None}

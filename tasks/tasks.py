@@ -44,18 +44,17 @@ def build_tasks(goal: str, job_id: int = None) -> list:
     plan_task = Task(
         description=(
             f"USER GOAL: {goal}\n\n"
-            "1. Use the plan_subtasks tool to decompose this goal.\n"
-            "2. Identify which agents should handle each part.\n"
-            "3. List any prerequisites or dependencies between subtasks.\n"
-            "4. Check memory for any relevant past work on similar tasks.\n"
+            "Create a structured execution plan:\n"
+            "1. Break this goal into 3-5 clear subtasks.\n"
+            "2. Assign each subtask to the right agent (Researcher, Analyst, Coder, Writer, Critic).\n"
+            "3. Note any dependencies between subtasks.\n"
             "Output: A numbered execution plan with agent assignments."
         ),
         expected_output=(
             "A structured execution plan with:\n"
-            "- Numbered subtasks (1-6 max)\n"
+            "- Numbered subtasks (1-5 max)\n"
             "- Agent assigned to each\n"
-            "- Dependencies noted\n"
-            "- Any relevant prior context from memory"
+            "- Dependencies noted"
         ),
         agent=A["orchestrator"],
     )
