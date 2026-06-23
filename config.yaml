@@ -1,0 +1,68 @@
+# ============================================================
+# NEXUS Multi-Agent System — Configuration
+# ============================================================
+
+ollama:
+  base_url: "http://localhost:11434"
+  primary_model: "qwen2.5:3b"
+  fast_model: "qwen2.5:0.5b"       # used for sub-tasks / summarization
+  temperature: 0.2
+  num_ctx: 2048
+  num_predict: 512
+  timeout: 120
+
+memory:
+  persist_path: "./nexus_memory_db"
+  collection_name: "nexus_agent_memory"
+  n_recall: 4
+  embedding_model: "all-MiniLM-L6-v2"   # ~80MB, runs offline
+
+database:
+  path: "./nexus_jobs.db"
+
+tools:
+  web_search:
+    max_results: 5
+    timeout: 15
+  code_exec:
+    timeout: 20
+    allowed_imports:
+      - math, os, sys, json, re, datetime, itertools, collections
+      - random, time, string, hashlib, base64, pathlib
+      - numpy, scipy, sympy
+  file_io:
+    allowed_dirs:
+      - "./workspace"
+      - "./outputs"
+  url_fetch:
+    timeout: 10
+    max_content_length: 50000
+
+agents:
+  orchestrator:
+    max_iter: 5
+    verbose: true
+  researcher:
+    max_iter: 4
+    verbose: true
+  analyst:
+    max_iter: 4
+    verbose: true
+  coder:
+    max_iter: 5
+    verbose: true
+  writer:
+    max_iter: 3
+    verbose: true
+  critic:
+    max_iter: 3
+    verbose: true
+
+crew:
+  max_rpm: 8
+  memory: true
+  cache: true
+
+logging:
+  level: "INFO"
+  file: "./nexus_logs/nexus.log"

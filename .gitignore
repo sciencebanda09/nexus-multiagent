@@ -1,0 +1,9 @@
+﻿nexus_memory_db/
+nexus_logs/
+nexus_jobs.db
+workspace/
+outputs/
+__pycache__/
+*.pyc
+.env
+nexus_env/
